@@ -3,12 +3,10 @@ import ingredients.schema
 import users.schema
 
 
-class Query(
-    ingredients.schema.Query,
-    users.schema.Query,
-    graphene.ObjectType
-):
-    pass
-
-
-schema = graphene.Schema(query=Query)
+def create_schema(user=None):
+    query = type('Query', (
+        ingredients.schema.Query,
+        users.schema.Query,
+        graphene.ObjectType
+    ), {})
+    return graphene.Schema(query=query)
